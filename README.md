@@ -43,7 +43,7 @@ AgriEnergyConnect is an ASP.NET Core MVC application designed to connect farmers
 -I used a local database but functionality will still be there you might just need to seed your own data.
 -Open the Program.cs file and ensure it includes the database creation logic
 
-3. **Build the application**:																	
+3. **Build the application**																	
 Open packaage manager console and run the following command:
 ```sh
 dotnet build
@@ -55,41 +55,41 @@ Open packaage manager console and run the following command:
 dotnet run
 ```
 
-5. **Building and Running the Prototype**
+### Building and Running the Prototype
 **Building**:
 -Open the solution in Visual Studio and build the project using Ctrl+Shift+B.
 -Alternatively, use the command line to build the project with dotnet build.
 
-6. **Running**
+**Running**
 -In Visual Studio, press F5 to run the project.
 -Using the command line, navigate to the project directory and execute dotnet run.
 
-7. **System Functionalities**
+### System Functionalities
 -User Registration and Login
 -Users can register and log in to access different parts of the application.
 -User roles determine the accessible features.
 
-8. Farmers Management
+1. **Farmers Management**
 -View Farmers: Display a list of all registered farmers.
 -Create Farmer: Add new farmers to the system.
 -Edit Farmer: Update farmer details.
 -Delete Farmer: Remove farmers from the system.
 -Search Functionality
 
-9. **Products Management**
+2. **Products Management**
 -View Products: Display a list of all available products.
 -Create Product: Add new products to the system.
 -Edit Product: Update product details.
 -Delete Product: Remove products from the system.
 -Search Functionality
 
-10. **Dark Mode**
+3. **Dark Mode**
 -Toggle between light and dark mode for better accessibility.
 
-11. **Logout Confirmation**
+4. **Logout Confirmation**
 -Users will be asked to confirm before logging out.
 
-12. **User Roles**
+### User Roles
 **Employees**
 -Full access to all functionalities.
 -Manage farmers and products.
