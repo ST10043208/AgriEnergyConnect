@@ -21,30 +21,39 @@ AgriEnergyConnect is an ASP.NET Core MVC application designed to connect farmers
    ```sh
    git clone https://github.com/ST10043208/AgriEnergyConnect
    cd AgriEnergyConnect
+   ```
 
 2. **Set Up the Database**:
 -Open the appsettings.json file and configure the connection string to your SQL Server instance:			
  json
 -Exchange your_server_name with your SQL Server instance name. The program will automatically make a new database with the correct name.
--"ConnectionStrings": {
+```sh
+"ConnectionStrings": {
   "DefaultConnection": "Server=your_server_name;Database=AgriEnergyConnectDb;Trusted_Connection=True;MultipleActiveResultSets=true"
 }
+```
 -Alternatively, you can use a local database by changing the connection string to (localdb)\\mssqllocaldb:
  json
--"ConnectionStrings": {
+```sh
+"ConnectionStrings": {
   "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=AgriEnergyConnectDb;Trusted_Connection=True;MultipleActiveResultSets=true"
 }
+```
 -Unfortunately data will not persist if you use a local database.
 -I used a local database but functionality will still be there you might just need to seed your own data.
 -Open the Program.cs file and ensure it includes the database creation logic
 
 3. **Build the application**:																	
 Open packaage manager console and run the following command:
+```sh
 dotnet build
+```
 
 4. **Run the application**:
 Open packaage manager console and run the following command:
+```sh
 dotnet run
+```
 
 5. **Building and Running the Prototype**
 **Building**:
