@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AgriEnergyConnect</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-pzjw8f+ua7Kw1TIq9P5xX4/xJpIj5N4F1s2nU69h/2yro4LEjPpXtkK07py7kWoQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/custom.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .logo {
+            max-height: 200px; 
+            max-width: 100%;
+        }
+
+        .navbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .centered-content {
+            display: flex;
+            justify-content: center;                       
+        }
+
+        body {
+            background-image: url('~/images/background.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('~/images/background.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1; 
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            z-index: 2;
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background-color: #343a40;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <img src="~/images/background2.jpg" alt="AgriEnergyConnect" class="background-image">
+    <div class="centered-content">
+                <a class="navbar-brand d-flex align-items-center" href="@Url.Action("Index", "Home")">
+                    <img src="~/images/logo-removebg.png" alt="AgriEnergyConnect" class="logo">
+                    <span class="ml-2"></span>
+                </a>
+    </div>
+    <header class="centered-content">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">          
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">                    
+                    <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>                    
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    
+                    @if (UserClass.loggedIn)
+                    {                        
+
+                        if (UserClass.role)
+                        {
+                            <div class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Farmers")">Farmers</a>
+                            </div>
+                            <div class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Products")">Products</a>
+                            </div>
+                        }
+                        if (UserClass.role == false)
+                        {
+                            <div class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Products")">Products</a>
+                            </div>
+                        }
+                        
+                    }
+                    else
+                    {
+                        <div class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Login", "Account")">Login</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Register", "Account")">Register</a>
+                        </div>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="centered-content mt-3">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <div class="container mt-3">
+
+        <div style="padding:20px;">
+            <button id="themeToggleButton" class="btn btn-secondary" onclick="toggleTheme()">Toggle Dark Mode</button>
+        </div>
+
+        @RenderSection("Scripts", required: false)        
+            <script type="text/javascript">
+                 function toggleTheme() {
+                        const currentTheme = document.documentElement.getAttribute("data-theme");
+                        const newTheme = currentTheme === "dark" ? "light" : "dark";
+                        document.documentElement.setAttribute("data-theme", newTheme);
+                        localStorage.setItem("theme", newTheme);
+                    }
+
+                    // Set theme on initial load
+                    (function () {
+                        const savedTheme = localStorage.getItem("theme") || "light";
+                        document.documentElement.setAttribute("data-theme", savedTheme);
+                    })();
+            </script>        
+
+        @if (UserClass.loggedIn)
+        {
+            <div style="padding:30px;">
+                <form id="logoutForm" method="post" asp-controller="Account" asp-action="Logout" style="display:inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirmLogout(event);">
+                        Logout
+                    </button>
+                </form>
+            </div>
+
+            @RenderSection("Scripts", required: false)
+            {
+                <script type="text/javascript">
+                    function confirmLogout(event) {
+                        if (!confirm("Are you sure you want to log out?")) {
+                            event.preventDefault();
+                            return false;
+                        }
+                        return true;
+                    }                   
+                </script>
+            }
+        }
+    </div>
+    <footer class="footer">
+        <div>
+            <p class="text-center">&copy; @DateTime.Now.Year - AgriEnergyConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq9P5xX4/xJpIj5N4F1s2nU69h/2yro4LEjPpXtkK07py7kWoQ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgBtkbNfJ1bda9r6A4Pvbh2ItB/smkqI0Jlyy7XU5x0yLOP+PGi" crossorigin="anonymous"></script>
+</body>
+</html>
